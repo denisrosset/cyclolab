@@ -1,3 +1,3 @@
-addSbtPlugin("me.lessis" % "bintray-sbt" % "0.3.0")
-addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.4")
-addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.8.2")
+addSbtPlugin("org.foundweekends" % "sbt-bintray" % "0.5.6")
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.13")
+addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.12")
