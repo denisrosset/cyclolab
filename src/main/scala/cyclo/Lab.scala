@@ -16,8 +16,12 @@ object Lab {
   def isWhole(arg: Array[Cyclo]): Array[Boolean] = arg.map(c => c.isRational && c.toRational.isWhole)
 
   def isRational(arg: Array[Cyclo]): Array[Boolean] = arg.map(_.isRational)
-  
+
+  def E(order: Int): Array[Cyclo] = Array(Cyclo.e(order))
+
   def E(orders: Array[Int]): Array[Cyclo] = orders.map(Cyclo.e)
+
+  def parse(string: String): Array[Cyclo] = parse(Array(string))
 
   def parse(strings: Array[String]): Array[Cyclo] = strings.map(s => fastparse.parse(s, Parser.expression(_)).fold((_, _, _) => null, (c, _) => c))
 
@@ -86,6 +90,10 @@ object Lab {
     res.data.map(_.asInstanceOf[Cyclo])
   }
 
+  def sum(lhs: Array[Cyclo]): Cyclo = if (lhs.isEmpty) Cyclo.zero else lhs.reduce(_ + _)
+
+  def prod(lhs: Array[Cyclo]): Cyclo = if (lhs.isEmpty) Cyclo.one else lhs.reduce(_ * _)
+
   def plusScalar(lhs: Array[Cyclo], rhs: Cyclo): Array[Cyclo] = lhs.map(_ + rhs)
 
   def minusScalar(lhs: Array[Cyclo], rhs: Cyclo): Array[Cyclo] = lhs.map(_ - rhs)
@@ -103,8 +111,15 @@ object Lab {
   def approximate(lb: Array[Double], ub: Array[Double]): Array[Cyclo] = (lb zip ub) map {
     case (l, u) => Cyclo(ContinuedFraction.bestApproximation(l, u))
   }
-  
+
+  def approximate(lb: Double, ub: Double): Array[Cyclo] = approximate(Array(lb), Array(ub))
+
+  def fromDouble(d: Double): Array[Cyclo] = fromDouble(Array(d))
+
   def fromDouble(d: Array[Double]): Array[Cyclo] = d.map(x => Cyclo(Rational(x)))
+
+  def fromRational(numerator: Long, denominator: Long): Array[Cyclo] =
+    fromRational(Array(numerator), Array(denominator))
 
   def fromRational(numerators: Array[Long], denominators: Array[Long]): Array[Cyclo] =
     (numerators zip denominators).map { case (n, d) => Cyclo(Rational(n, d)) }
